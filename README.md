@@ -14,6 +14,16 @@ So this is likely what you'd have done in your project.
 This is a package that allows you to control the flow of the request without
 all that overhead.
 
+# Table of contents
+
+- [Dependencies](#Dependencies)
+- [Usage](#Usage)
+- [API](#API)
+  - [Scheduler](#Scheduler)
+  - [TaskFunction](#TaskFunction)
+- [Examples](#Examples)
+- [Inspiration](#Inspiration)
+
 # Dependencies
 
 This library expect `AbortController` to exists if you use it in the browser.
