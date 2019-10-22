@@ -82,11 +82,22 @@ This function will return the result returned from **TaskFunction**.
 
 The function you want to be execute
 
+```javascript
+const taskFunction = (signal, ...params) => {
+  //  ...
+}
+```
+
 ### Parameters
 
 - **signal**: This is the signal from the `AbortController`. You **must** use it
   if you want _task-scheduler_ to be able to cancel your task execution.
 - **...params**: The params that will be passed to the scheduled function.
+
+### Return
+
+You can return whatever you want. The returned value will be passed directly
+to the caller of the scheduled task wrapped with the scheduler.
 
 # Why you should use it
 
