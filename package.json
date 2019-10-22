@@ -4,6 +4,11 @@
   "main": "dist/index.js",
   "author": "Nicholas Peretti <peretti.nicholas@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "scheduler",
+    "request",
+    "fetchlast"
+  ],
   "scripts": {
     "build": "NODE_ENV=production webpack --prod",
     "test": "jest",
