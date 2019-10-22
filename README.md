@@ -17,6 +17,7 @@ all that overhead.
 # Table of contents
 
 - [Dependencies](#Dependencies)
+- [Install](#Install)
 - [Usage](#Usage)
 - [API](#API)
   - [Scheduler](#Scheduler)
@@ -28,6 +29,18 @@ all that overhead.
 
 This library expect `AbortController` to exists if you use it in the browser.
 If you're targeting IE or Samsung Browser, please make sure you have a polifill.
+
+# Install
+
+```
+npm i request-scheduler
+```
+
+or
+
+```
+yarn add request-scheduler
+```
 
 # Usage
 
