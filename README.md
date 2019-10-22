@@ -17,7 +17,7 @@ all that overhead.
 # Dependencies
 
 This library expect `AbortController` to exists if you use it in the browser.
-If you're targetting IE or Samsung Browser, please make sure you have a polifill.
+If you're targeting IE or Samsung Browser, please make sure you have a polifill.
 
 # Usage
 
@@ -43,19 +43,94 @@ document.getElementById('searchbox')
 
 In the above example we are catching every single change in the input text, which
 is a search box used by the user to filter the data he's watching.
-Thanks to the scheduler, we are canceling every request "on the air" if the user
-trigger a change in the meanwhile.
+Thanks to the scheduler, we are canceling every request "on the air" when the user
+trigger a change.
+
+# API
+
+## Scheduler
+
+The scheduler accept a function that will be executed and then canceled if
+another call to the function has been made.
+
+```javascript
+const fetchDataConsistently = Scheduler(fetchDataApiCall)
+//  ...
+fetchDataConsistently()
+```
+
+### Parameters
+
+- **TaskFunction**: The function you want to execute and eventually cancel.
+
+### Returns
+
+Returns a new function that will call and eventually cancel your **TaskFunction**.
+This function will return the result returned from **TaskFunction**.
+
+## TaskFunction
+
+The function you want to be execute
+
+### Parameters
+
+- **signal**: This is the signal from the `AbortController`. You **must** use it
+  if you want _task-scheduler_ to be able to cancel your task execution.
+- **...params**: The params that will be passed to the scheduled function.
 
 # Why you should use it
 
 This approach allows you to:
 
-- save network resource
-- keep data consistency in your screen
+- save network traffic
+- keep your UI consistent with your data
 
-Sometimes, when two idetical request are triggered, the lastest could be fastest
-of the first one to resolve. This cause an inconsistency in the UI because the
-user set a certain filter but the result of the page in not what he was expecting.
+Sometimes, when two idetical request are triggered, the lastest could be faster
+than the first one to resolve. This causes an inconsistency in the UI because the
+user set a certain filter but the result of the page in not what the user expected.
+
+# Examples
+
+## Simple data fetching
+
+```javascript
+import Scheduler from 'task-scheduler'
+
+const fetchFeed = ({ ...options }) =>
+  fetch(FEED_URL, { ...options }).then(res => res.json())
+
+const consistentFetchFeed = Scheduler(signal =>
+  fetchFeed({
+    signal
+  })
+)
+
+//  ... In your UI ...
+const data = await consistentFetchFeed()
+```
+
+## Data fetching with parameters
+
+```javascript
+import Scheduler from 'task-scheduler'
+
+const fetchDataByFreeTextSearch = (freeTextSearch, { ...options }) =>
+  fetch(FEED_URL, {
+    ...options,
+    body: JSON.stringify({
+      freeTextSearch
+    })
+  }).then(res => res.json())
+
+const consistentFetchFeed = Scheduler((signal, freeTextSearch) =>
+  fetchFeed(freeTextSearch, {
+    signal
+  })
+)
+
+//  ... In your UI ...
+const data = await consistentFetchFeed('Text')
+```
 
 # Inspiration
 
