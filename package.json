@@ -1,5 +1,5 @@
 {
-  "name": "task-scheduler",
+  "name": "request-scheduler",
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "Nicholas Peretti <peretti.nicholas@gmail.com>",
@@ -18,5 +18,6 @@
     "jest": "^24.9.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
-  }
+  },
+  "repository": "git@github.com:NicholasPeretti/request-scheduler.git"
 }

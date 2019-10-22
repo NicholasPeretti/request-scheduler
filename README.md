@@ -1,4 +1,4 @@
-# Task-scheduler
+# request-scheduler
 
 There are cases where you may want to execute only the last requests that the
 users has triggered.
@@ -32,7 +32,7 @@ If you're targeting IE or Samsung Browser, please make sure you have a polifill.
 # Usage
 
 ```javascript
-import Scheduler from 'task-scheduler'
+import Scheduler from 'request-scheduler'
 import debounce from 'lodash/fp/debounce'
 
 const fetchData = Scheduler((signal, search) => fetch('/api/v1/feed', {
@@ -91,7 +91,7 @@ const taskFunction = (signal, ...params) => {
 ### Parameters
 
 - **signal**: This is the signal from the `AbortController`. You **must** use it
-  if you want _task-scheduler_ to be able to cancel your task execution.
+  if you want _request-scheduler_ to be able to cancel your task execution.
 - **...params**: The params that will be passed to the scheduled function.
 
 ### Return
@@ -115,7 +115,7 @@ user set a certain filter but the result of the page in not what the user expect
 ## Simple data fetching
 
 ```javascript
-import Scheduler from 'task-scheduler'
+import Scheduler from 'request-scheduler'
 
 const fetchFeed = ({ ...options }) =>
   fetch(FEED_URL, { ...options }).then(res => res.json())
@@ -133,7 +133,7 @@ const data = await consistentFetchFeed()
 ## Data fetching with parameters
 
 ```javascript
-import Scheduler from 'task-scheduler'
+import Scheduler from 'request-scheduler'
 
 const fetchDataByFreeTextSearch = (freeTextSearch, { ...options }) =>
   fetch(FEED_URL, {
